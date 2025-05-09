@@ -1,6 +1,6 @@
 ![app-icon](https://github.com/user-attachments/assets/86190cc2-c4aa-4c1c-96c3-49b4bdd93e1d)
 
-🤖 CoPilot Finance Chatbot
+# 🤖 CoPilot Finance Chatbot
 
 **Talk to your finances. Literally.**
 
