@@ -1,50 +1,130 @@
-# Welcome to your Expo app 👋
+🤖 CoPilot Finance Chatbot
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Talk to your finances. Literally.**
 
-## Get started
+This is a mobile app I built with **React Native + Expo** that lets users _speak_ to a finance assistant powered by a Retrieval-Augmented Generation (RAG) backend. Ask about your runway, burn rate, overdue invoices, or ROI—and get accurate, voice-based answers pulled straight from structured financial data.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 🎯 What This App Does
 
-2. Start the app
+-   Accepts questions via **typed or spoken input**
+-   Retrieves relevant facts from a **chunked financial vector index**
+-   Uses OpenAI to **generate clear, grounded answers** from those facts
+-   Speaks the answers out loud with **Expo Speech**
+-   Runs seamlessly on **iOS, Android, and Web**
 
-   ```bash
-   npx expo start
-   ```
+All questions stay strictly within the financial domain—thanks to a custom Supabase Edge Function that filters context and prevents the model from hallucinating answers outside supplied data.
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## ⚙️ Why I Built It With Expo + React Native
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### With React Native we can do 2 things that native developers **CANNOT** do:
 
-## Get a fresh project
+📱 **One codebase, all platforms** — iOS, Android & Web from a single project  
+⚡ **Instant updates** — fix bugs or push improvements over-the-air without review delays
 
-When you're ready, run:
+Expo gives me tooling to move fast without giving up native capabilities like microphone access, speech synthesis, and background tasks. Building multi-platform voice interfaces has never been this smooth.
 
-```bash
-npm run reset-project
-```
+---
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🔒 Why It Doesn't Hallucinate
 
-## Learn more
+This isn't ChatGPT with free rein. Every financial answer must:
 
-To learn more about developing your project with Expo, look at the following resources:
+-   Be grounded in retrieved documents from the RAG engine
+-   Cite specific rows or formulas when giving numbers
+-   Reply "I don't have that data" when facts are missing
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+The Supabase Edge Function that handles prompts uses a strict prompt policy and includes only:
 
-## Join the community
+-   Top-matching financial facts from a vector index
+-   Relevant formulas from the financial knowledge base
+-   Limited recent chat history for follow-ups
 
-Join our community of developers creating universal apps.
+No facts = no answer. That keeps the assistant trustworthy.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+## 🧠 Powered by `rag-finance-engine`
+
+The app connects to a backend that transforms every row of financial data—snapshots, transactions, formulas—into its own self-describing fact string and embeds it separately. This lets the assistant:
+
+-   Pull in only the rows needed for a given question
+-   Keep the prompt short and focused
+-   Avoid vague summaries or irrelevant details
+
+This level of granularity is what makes the whole experience feel more like a calculator than a chatbot.
+
+---
+
+## 🔊 Voice Features
+
+-   Built-in voice recognition (via `expo-speech-recognition`) lets users dictate questions
+-   Answers are spoken out loud, with support for:
+    -   Voice selection
+    -   Pitch and rate customization
+    -   Live test phrases like "Testing Pilot AI"
+
+You can fully control the tone and pace of your CoPilot.
+
+---
+
+## 📚 Stack
+
+-   **React Native** via Expo
+-   **Supabase** for data, auth, and edge functions
+-   **OpenAI** for embeddings + completions
+-   **Expo Speech / Speech Recognition** for voice I/O
+-   **Custom vector-based retrieval layer** for grounded answers
+
+---
+
+## 🗣 Sample Conversation
+
+**User:** What's my burn rate for April?  
+**CoPilot:** In April, your burn rate was 16,500 dollars. This includes rent, payroll, and subscriptions.
+
+**User:** And how much runway do I have?  
+**CoPilot:** With a cash balance of 48,000 dollars and a burn rate of 16,500, your current runway is approximately 2.9 months.
+
+---
+
+## 🔍 Focused on Finance—Not a General Chatbot
+
+CoPilot AI is not a general-purpose assistant. It doesn’t generate small talk, explain pop culture, or summarize articles. It stays strictly focused on:
+
+-   Budgets
+-   Ratios
+-   Balances
+-   Cash flow
+-   Equity
+-   Vendor payments
+-   Any fact that can be traced to the database
+
+That constraint makes it reliable in ways traditional LLM interfaces aren’t.
+
+---
+
+## 💡 What I Learned
+
+This project was an experiment in precision + experience:
+
+-   How to make RAG _not suck_ by chunking smart
+-   How to speak to your data without feeling like you're talking to a toy
+-   How to make voice interfaces feel instant and useful
+-   How to keep answers auditable and clean
+
+---
+
+## 🔜 Next Steps
+
+-   Visual charts and data overlays
+-   Better handling of follow-up questions
+-   Push alerts for threshold-based financial triggers
+-   User history insights and natural summaries
+
+---
+
+Want to learn how the backend works? Check out: [rag-finance-engine](https://github.com/felipemelendez/rag-finance-engine)
