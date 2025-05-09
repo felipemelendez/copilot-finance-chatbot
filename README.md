@@ -49,7 +49,7 @@ No facts = no answer. That keeps the assistant trustworthy.
 
 ---
 
-## 🧠 Powered by `rag-finance-engine`
+## 🧠 Powered by [`rag-finance-engine`](https://github.com/felipemelendez/rag-finance-engine)
 
 The app connects to a backend that transforms every row of financial data—snapshots, transactions, formulas—into its own self-describing fact string and embeds it separately. This lets the assistant:
 
